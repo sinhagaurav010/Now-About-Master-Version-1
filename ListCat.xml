@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<categories>
+    <catagory>    
+        <Name>Dining</Name>    
+        <Image>Dining-Icon.png</Image>
+        <Id>DINI</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Nightlife</Name>    
+        <Image>Nightlife-Icon.png</Image>
+        <Id>NIGH</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+        <catagory>    
+        <Name>Beauty and Spa</Name>    
+        <Image>Beauty-and-Spa-Icon.png</Image>
+        <Id>BEAU</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>            
+		<Name>Shopping</Name>    
+        <Image>Shopping-Icon.png</Image>
+        <Id>SHOP</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Arts and Entertainment</Name>    
+        <Image>Art-Icon.png</Image>
+        <Id>ARTS</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Health and Fitness</Name>    
+        <Image>Health-and-Fitness-Icon.png</Image>
+        <Id>HEAL</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Accomodation</Name>    
+        <Image>Accomodation-Icon.png</Image>
+        <Id>ACCO</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Services</Name>    
+        <Image>Services-Icon.png</Image>
+        <Id>SERV</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Travel</Name>    
+        <Image>Travel-Icon.png</Image>
+        <Id>TRAV</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Pubs</Name>    
+        <Image>Pubs-Icon.png</Image>
+        <Id>PUBS</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Florists</Name>    
+        <Image>Florists-Icon.png</Image>
+        <Id>FLOR</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Clubs and Groups</Name>    
+        <Image>Clubs-and-Groups-Icon.png</Image>
+        <Id>CLUB</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+  
+    
+</categories>

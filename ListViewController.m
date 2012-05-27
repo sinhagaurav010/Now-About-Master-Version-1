@@ -20,6 +20,9 @@
  
  <List><ListType>Cat</ListType><Type>PUBS </Type><Name>PUBS3</Name><Lat>52.7898100</Lat><Long>-1.5654210</Long><Address>26 Aston Drive, Newhall</Address><Email>Paul.cantrill@acs-ltd.uk.com</Email><Phone>7958548890</Phone><URL>www.acs-ltd.uk.com</URL><Cost>100</Cost><Desc>Where it all happens, the centre of the universe.</Desc><Deal>Offer</Deal><DealDesc>Promotional Offer</DealDesc><DealExpires>2011-11-11T00:00:00</DealExpires><Miles>5.248484479945753e+003</Miles><Image></Image></List>
  
+ 
+ 
+ 
  <ListType>Cat</ListType><Name>PUBS4</Name><Long>-1.5654210</Long><Email>Paul.cantrill@acs-ltd.uk.com</Email><URL>www.acs-ltd.uk.com</URL><Desc>Where it all happens, the centre of the universe.</Desc><DealDesc>Promotional Offer</DealDesc><Miles>5.248484479945753e+003</Miles>
  
  <List><ListType>Cat</ListType><Type>PUBS </Type><Name>PUBS5</Name><Lat>52.7898100</Lat><Long>-1.5654210</Long><Address>26 Aston Drive, Newhall</Address><Email>Paul.cantrill@acs-ltd.uk.com</Email><Phone>7958548890</Phone><URL>www.acs-ltd.uk.com</URL><Cost>100</Cost><Desc>Where it all happens, the centre of the universe.</Desc><Deal>Offer</Deal><DealDesc>Promotional Offer</DealDesc><DealExpires>2011-11-11T00:00:00</DealExpires><Miles>5.248484479945753e+003</Miles><Image></Image></List>

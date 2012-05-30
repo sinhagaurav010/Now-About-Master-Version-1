@@ -343,6 +343,7 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTableCell" owner:self options:nil];
         cell = (CustomTableCell *)[nib objectAtIndex:0];
         
+        
         CAGradientLayer *gradient = [CAGradientLayer layer];
         gradient.frame = cell.bounds;
         

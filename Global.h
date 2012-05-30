@@ -76,7 +76,7 @@ string CatInd = Request.Form["CatInd"].ToString().Trim();
 #define COLORCELL      [UIColor colorWithRed:0.444 green:0.444 blue:0.444 alpha:1.0];
 
 
-#define TESTMODE 1
+#define TESTMODE 0
 
 
 #define KsDISPLAYOPTION @"Info", @"Deal",@"Map" ,@"VIPCard",nil
@@ -122,6 +122,9 @@ BOOL isSaveToFav;
 
 #define CATEGORY_FEED_URL @""
 #define TAGFEED_URL @""
+
+#define RADSAVED @"RADSAVED"
+#define RADSAVEDSAT @"RADSAVEDSATUS"
 
 
 #define URLDATA @"http://acsdev.co.uk/BackOfficeService.aspx"

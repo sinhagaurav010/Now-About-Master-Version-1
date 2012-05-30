@@ -122,7 +122,7 @@
 		[view release];
 		
 	}
-
+    
     
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:CHANGEMEASUNIT object:nil];
     
@@ -164,7 +164,7 @@
     
     else if([self.stringTitle isEqualToString:@"Clubs and Groups"])
         arraySub = [[NSMutableArray alloc] initWithObjects:KsClubsandGroups];
-
+    
     
     
     
@@ -181,7 +181,7 @@
     //    }
     //    
     
-       
+    
     [self.navigationItem setTitle:stringTitle];
     
     //    self.urls = [[NSMutableArray alloc]init];
@@ -214,8 +214,16 @@
 {
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:URLDATA]];
     
+    if([[ModalController  getContforKey:RADSAVEDSAT] isEqualToString:@"y"])
+        radius = [[ModalController  getContforKey:RADSAVED] integerValue];
+    else {
+        radius = 20000;
+    }
+    
     if(TESTMODE)
-        radius = 7000;
+        radius = 20000;
+    
+    
     
     [request setRequestMethod:@"POST"];
     [request setPostValue:locationUser.strUserLat forKey:BASELAT];
@@ -226,21 +234,28 @@
     [request setDelegate:self];
     
     
+    NSLog(@"~~~~~~~%@",stringCat);
+    NSLog(@"~~~~~~%@",locationUser.strUserLat);
+    NSLog(@"~~~~~~%@",locationUser.strUserLong);
+    NSLog(@"~~~~~~%@",[NSString stringWithFormat:@"%d",radius]);
+    NSLog(@"~~~~~~%@",stringCatInd);
+    
     [request startAsynchronous];
     
-
+    
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
     [self doneLoadingTableViewData];
-
+    
     [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
     NSLog(@"I have got data------->>>>>%@",[request responseString]);
     
     NSError *err;
-    NSDictionary *_xmlDictionaryData = [[XMLReader dictionaryForXMLData:[request responseData] error:&err] retain];
-        
+    NSDictionary *_xmlDictionaryData = [[XMLReader dictionaryForXMLData:[request responseData] 
+                                                                  error:&err] retain];
+    
     
     if([[_xmlDictionaryData objectForKey:@"Lists"] objectForKey:@"List"])
     {
@@ -268,9 +283,9 @@
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
     [self doneLoadingTableViewData];
-
+    
     [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-
+    
     [ModalController showTheAlertWithMsg:@"Error in network" withTitle:@"Failed" inController:self];        
 }
 
@@ -335,7 +350,7 @@
     //	}
     //	
     
-//    CustomTableCell *cell = (CustomTableCell *)[tableView dequeueReusableCellWithIdentifier:@"ListCell"];
+    //    CustomTableCell *cell = (CustomTableCell *)[tableView dequeueReusableCellWithIdentifier:@"ListCell"];
     
     CustomTableCell *cell = (CustomTableCell *)[tableView dequeueReusableCellWithIdentifier:@"CustomTableCell"];
 	if(cell == nil) 
@@ -350,21 +365,32 @@
         CGColorRef topColor = [[UIColor whiteColor] CGColor];
         CGColorRef bottomColor = [[UIColor colorWithRed:0.80 green:.80 blue:.80 alpha:1.0] CGColor];
         gradient.colors = [NSArray arrayWithObjects:(id)topColor, (id)bottomColor, nil];
-            
+        
         [cell.layer insertSublayer:gradient atIndex:0];
     }
-
-//    cell.backgroundColor = COLORCELL
+    
+    //    cell.backgroundColor = COLORCELL
 	[cell settitle:[[arrayList objectAtIndex:indexPath.row] objectForKey:FIELDNAME]];
     cell.subtitle.text = stringTitle;
+    
     [cell setCostLabelstr:[NSString stringWithFormat:@"£%@",[[arrayList objectAtIndex:indexPath.row] objectForKey:FIELDCOST]]];
     cell.description.text = [NSString stringWithFormat:@"%@",[[arrayList objectAtIndex:indexPath.row] objectForKey:FIELDDESC]];
     
     [cell setDistanceLabelstr:[NSString stringWithFormat:@"%@",[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayList objectAtIndex:indexPath.row ]objectForKey:@"Lat"]doubleValue] with:[[[arrayList objectAtIndex:indexPath.row ]objectForKey:@"Long"]doubleValue]]]];
-    [cell setDealLabelstr:[[arrayList objectAtIndex:indexPath.row] objectForKey:FIELDDEAL]];
-    NSLog(@"%@",[NSString stringWithFormat:IMAGEURL,[[arrayList objectAtIndex:indexPath.row]objectForKey:FIELDIMAGE]]);
-    [cell setPhotoFromUrl:[NSString stringWithFormat:IMAGEURL,[[arrayList objectAtIndex:indexPath.row]objectForKey:FIELDIMAGE]]];
     
+    [cell setDealLabelstr:[[arrayList objectAtIndex:indexPath.row] objectForKey:FIELDDEAL]];
+    
+    
+    if([[[arrayList objectAtIndex:indexPath.row]objectForKey:FIELDIMAGE] isKindOfClass:[NSString class]])
+    {
+        [cell setPhotoFromUrl:[NSString stringWithFormat:IMAGEURL,[[arrayList objectAtIndex:indexPath.row]objectForKey:FIELDIMAGE]]];   
+    }
+    else if([[[arrayList objectAtIndex:indexPath.row]objectForKey:FIELDIMAGE] isKindOfClass:[NSArray class]])
+        if([[[arrayList objectAtIndex:indexPath.row]objectForKey:FIELDIMAGE] count]>0)
+        {
+            NSLog(@"%@",[[[arrayList objectAtIndex:indexPath.row]objectForKey:FIELDIMAGE] objectAtIndex:0]);
+            [cell setPhotoFromUrl:[NSString stringWithFormat:IMAGEURL,[[[arrayList objectAtIndex:indexPath.row]objectForKey:FIELDIMAGE] objectAtIndex:0]]];
+        }
     
     //cell.venueImage.image = [(UIImageView*)[arrayImages objectAtIndex:indexPath.row] image];
     return (UITableViewCell *)cell;

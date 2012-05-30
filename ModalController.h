@@ -25,6 +25,9 @@
 
 }
 
++(void)showAlertWithMessge:(NSString*)strMsg withTitle:(NSString*)strTitle inController:(UIViewController *)controller;
+
+
 +(void)saveTheContent:(id)savedEle withKey:(NSString*)stringKey;
 +(void)removeContentForKey:(NSString*)stringKey;
 +(id)getContforKey:(NSString*)stringKey;

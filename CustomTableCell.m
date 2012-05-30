@@ -97,7 +97,7 @@
 - (void)setPhotoFromUrl:(NSString*)flickrPhoto
 {
     self.imagePro.placeholderImage = [UIImage imageNamed:@"placeholder.jpg"];
-    
+    NSLog(@"%@",[flickrPhoto stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
     imagePro.imageURL = [NSURL URLWithString:[flickrPhoto stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
 //    [self.imageViewM setImageWithURL:[NSURL URLWithString:flickrPhoto]

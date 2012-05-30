@@ -21,11 +21,12 @@
 #import "ACSProductAppDelegate.h"
 //#import "UIBarButtonItem+Extension.h"
 #import "DealView.h"
-
+#import <Accounts/Accounts.h>
+#import <Twitter/Twitter.h>
 #import "ScrollViewImages.h"
 #import "InfoView.h"
 
-@interface DetailsViewController : UIViewController<MFMailComposeViewControllerDelegate,infoViewDelagate,FBSessionDelegate, FBRequestDelegate,FBDialogDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface DetailsViewController : UIViewController<MFMailComposeViewControllerDelegate,infoViewDelagate,FBSessionDelegate, FBRequestDelegate,FBDialogDelegate,UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>
 {
     IBOutlet FBLoginButton* _fbButton;
 
@@ -67,7 +68,7 @@
 @property(assign)BOOL isFromFav;
 -(IBAction)touchToAddFav:(id)sender;
 -(IBAction)ShareFace:(id)sender;
--(IBAction)ShareTwitter:(id)sender;
+-(void)ShareTwitter;
 -(IBAction)EmailToFriend:(id)sender;
 
 -(IBAction)touchForDeal:(id)sender;

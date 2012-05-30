@@ -156,7 +156,39 @@
 
 -(IBAction)ShareOption:(id)sender
 {
+    UIActionSheet *action = [[UIActionSheet  alloc] initWithTitle:@"Share"
+                                                         delegate:self
+                                                cancelButtonTitle:@"Cancel" 
+                                           destructiveButtonTitle:nil
+                                                otherButtonTitles:@"Email",@"FaceBook",@"Twitter", nil];
     
+    [action  showInView:self.view];
+    [action  release];
+}
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            [self clickOn:nil withMessage:[dictInfo objectForKey:FIELDDESC]]; 
+
+            break;
+        case 1:
+        {
+            if (_fbButton.isLoggedIn) {
+                [self logout];
+            } else {
+                [self login];
+            }
+
+        }
+        case 2:
+        {
+            [self ShareTwitter];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 
@@ -172,13 +204,13 @@
 
 -(IBAction)goTomap:(id)sender
 {
-    if(self.buttonMap.selected == 0)
-        self.buttonMap.selected = 1;
-    else
-        self.buttonMap.selected = 0;
-    
-    self.buttonDeal.selected = 0;
-    self.buttonInfo.selected = 0;
+//    if(self.buttonMap.selected == 0)
+//        self.buttonMap.selected = 1;
+//    else
+//        self.buttonMap.selected = 0;
+//    
+//    self.buttonDeal.selected = 0;
+//    self.buttonInfo.selected = 0;
     
     MapViewController *mapController = [[MapViewController alloc] init];
     mapController.isFromDetail = 1;
@@ -267,6 +299,7 @@
     [self  setImageOfButton:self.buttonDeal inSel:kiDealSel andInNormal:kiDealnormal];
     [self  setImageOfButton:self.buttonMap inSel:kiMapSel andInNormal:kiMapnormal];
     
+    self.buttonInfo.selected = 1;
     
     NSMutableArray *arrayDisplay = [[NSMutableArray alloc] initWithObjects:KsDISPLAYOPTION];
     [self.scrllImages  setButtons:arrayDisplay];
@@ -295,6 +328,17 @@
     [self.infoview  setContentInView:dictInfo];
     
     
+    if([[self.dictInfo objectForKey:FIELDIMAGE] isKindOfClass:[NSString class]])
+    {
+        [self.infoview  setAllImage:[NSArray  arrayWithObjects:[self.dictInfo objectForKey:FIELDIMAGE],nil]];   
+    }
+    else if([[self.dictInfo objectForKey:FIELDIMAGE] isKindOfClass:[NSArray class]])
+        if([[self.dictInfo  objectForKey:FIELDIMAGE] count]>0)
+        {
+            [self.infoview  setAllImage:[NSArray arrayWithArray:[self.dictInfo objectForKey:FIELDIMAGE]]];
+            
+        }
+
     
     //////Set Deal View
     self.dealview = [[DealView alloc] init];
@@ -324,19 +368,19 @@
     
     ///FOR FACEBookINtegartion
     
-    //    ACSProductAppDelegate  * appDelegate = (ACSProductAppDelegate *)[[UIApplication sharedApplication] delegate];
-    //    
+        ACSProductAppDelegate  * appDelegate = (ACSProductAppDelegate *)[[UIApplication sharedApplication] delegate];
+        
     //    // Grab the facebook object from the app delegate.
-    //    _facebook = appDelegate.facebook;
-    //    _permissions =  [[NSArray arrayWithObjects:
-    //                      @"read_stream", @"publish_stream", @"offline_access",@"email",@"user_birthday",@"user_photos",nil] retain];
-    //    // _facebook = [[Facebook alloc] initWithAppId:AppIDAPI];
+        _facebook = appDelegate.facebook;
+        _permissions =  [[NSArray arrayWithObjects:
+                          @"read_stream", @"publish_stream", @"offline_access",@"email",@"user_birthday",@"user_photos",nil] retain];
+       // _facebook = [[Facebook alloc] initWithAppId:AppIDAPI];
     //    
     //    //_facebook.sessionDelegate = self;
     //    
-    //    _fbButton.isLoggedIn = NO;
+        _fbButton.isLoggedIn = NO;
     //    //_fbButton.
-    //    [_fbButton updateImage];
+        [_fbButton updateImage];
     //    
     //    self.navigationItem.title = [dictInfo objectForKey:FIELDNAME];
     //    
@@ -882,16 +926,122 @@
 
 
 
-#define mark -Integration of SocailNetworking-
+#pragma mark -Integration of SocailNetworking-
 -(IBAction)ShareFace:(id)sender
 {
 }
--(IBAction)ShareTwitter:(id)sender
+
+
+#pragma mark -share Twitter-
+
+-(void)ShareTwitter
 {
-    [ModalController showTheAlertWithMsg:@"Comming Soon" 
-                               withTitle:@"Info"
-                            inController:self];
+     
+        if([TWTweetComposeViewController  canSendTweet])
+        {
+            
+            TWTweetComposeViewController *twitter = [[TWTweetComposeViewController alloc] init];
+            
+            // Optional: set an image, url and initial text
+            [twitter addURL:[NSURL URLWithString:[dictInfo objectForKey:FIELDURL]]];
+            [twitter setInitialText:[dictInfo objectForKey:FIELDDESC]];
+            [twitter  addImage:[UIImage imageNamed:@"Icon_Low_Res.png"]];
+            // Show the controller
+            [self presentModalViewController:twitter animated:YES];
+            
+            // Called when the tweet dialog has been closed
+            twitter.completionHandler = ^(TWTweetComposeViewControllerResult result) 
+            {
+                NSString *title = @"Tweet Status";
+                NSString *msg; 
+                
+                if (result == TWTweetComposeViewControllerResultCancelled)
+                    msg = @"Tweet compostion was canceled.";
+                else if (result == TWTweetComposeViewControllerResultDone)
+                    msg = @"Tweet composition completed.";
+                
+                // Show alert to see how things went...
+                UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title 
+                                                                    message:msg 
+                                                                   delegate:self 
+                                                          cancelButtonTitle:@"Okay" 
+                                                          otherButtonTitles:nil];
+                [alertView show];
+                
+                // Dismiss the controller
+                [self dismissModalViewControllerAnimated:YES];
+            };
+//            ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+//            
+//            // Create an account type that ensures Twitter accounts are retrieved.
+//            ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+//            
+//            // Request access from the user to use their Twitter accounts.
+//            [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+//                if(granted) {
+//                    // Get the list of Twitter accounts.
+//                    NSArray *accountsArray = [accountStore accountsWithAccountType:accountType];
+//                    NSLog(@"twitter integration!!!!!!!!!!");
+//                    
+//                    
+//                    if ([accountsArray count] > 0) {
+//                        // Grab the initial Twitter account to tweet from.
+//                        ACAccount *twitterAccount = [accountsArray objectAtIndex:0];
+//                        
+//                        
+//                        NSLog(@"twitter integration!!!!!!!!!!");
+//                        
+//                        UIImage *image =nil;
+//                        
+//                        
+//                        TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://upload.twitter.com/1/statuses/update_with_media.json"] 
+//                                                                     parameters:[NSDictionary dictionaryWithObject:[dictInfo objectForKey:FIELDDESC] forKey:@"status"] 
+//                                                                  requestMethod:TWRequestMethodPOST];
+//                        
+//                        // "http://api.twitter.com/1/statuses/update.json" 
+//                        
+//                        [postRequest addMultiPartData:UIImagePNGRepresentation(image) 
+//                                             withName:@"media"
+//                                                 type:@"multipart/png"];
+//                        
+//                        
+//                        // Set the account used to post the tweet.
+//                        [postRequest setAccount:twitterAccount];
+//                        
+//                        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//                        hud.labelText = @"Tweeting";
+//                        
+//                        [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+//                            NSString *output = [NSString stringWithFormat:@"HTTP response status: %i", [urlResponse statusCode]];
+//                            
+//                            [self performSelectorOnMainThread:@selector(displayText:) withObject:output waitUntilDone:NO];
+//                        }];
+//                    }
+//                }
+//            }];
+        }
+        else 
+        {
+            UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Please configure twitter account"
+                                                               message:@"Not able to post in twitter.Please configure twitter account in setting App." 
+                                                              delegate:self
+                                                     cancelButtonTitle:@"OK"
+                                                     otherButtonTitles: nil];
+            [alerView show];
+            [alerView release];            
+        }
+        
+        
 }
+
+-(void)displayText:(id)sender
+{
+    [MBProgressHUD  hideHUDForView:self.view animated:YES];
+    [ModalController  showAlertWithMessge:@"Image has been posted!"
+                                withTitle:@"Succeed"
+                             inController:self];
+}
+
 -(IBAction)EmailToFriend:(id)sender
 {
     [self clickOn:nil withMessage:[dictInfo objectForKey:FIELDDESC]]; 

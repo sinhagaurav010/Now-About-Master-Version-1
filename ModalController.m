@@ -34,6 +34,16 @@
     
     [connection release];
 }
++(void)showAlertWithMessge:(NSString*)strMsg withTitle:(NSString*)strTitle inController:(UIViewController *)controller
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: strTitle
+                                                    message:strMsg 
+                                                   delegate:nil
+                                          cancelButtonTitle:nil 
+                                          otherButtonTitles:@"OK", nil];
+    [alert show];
+    [alert release];
+}
 
 //+(void)sendLog:(NSString *)string
 //{

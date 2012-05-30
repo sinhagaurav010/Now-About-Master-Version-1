@@ -20,6 +20,22 @@
     return self;
 }
 
+-(void)setAllImage:(NSArray *)arrayImages
+{
+    self.scrollImage.pagingEnabled = YES;
+    int incX = 0;
+    [self.scrollImage setContentSize:CGSizeMake([arrayImages count]*320, self.scrollImage.frame.size.height)];
+    for (int i=0; i<[arrayImages  count]; i++) {
+        EGOImageView *imagVen = [[EGOImageView alloc] initWithFrame:CGRectMake(incX, 0, 320, self.scrollImage.frame.size.height)];
+        imagVen.placeholderImage    = [UIImage imageNamed:@"PlaceHolder.png"];
+        NSLog(@"%@",[[arrayImages objectAtIndex:i]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
+        imagVen.imageURL = [NSURL URLWithString:[NSString stringWithFormat:IMAGEURL,[[arrayImages objectAtIndex:i]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+        [self.scrollImage addSubview:imagVen];
+        incX += 320;
+        [imagVen  release];
+    }
+}
+
 -(void)setContentInView:(NSMutableDictionary *)dict
 {
     arraySecTitle = [[NSMutableArray alloc] initWithObjects:@"Description",@"Detail", nil];

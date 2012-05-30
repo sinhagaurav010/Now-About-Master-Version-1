@@ -20,6 +20,14 @@ NSString * const facebookExpirationDateKey = @"facebookExpirationDate";
 {
 //    lginController = [[DetailsViewController alloc] init];
 
+    if(![ModalController  getContforKey:RADSAVEDSAT])
+    [ModalController saveTheContent:@"n"
+                            withKey:RADSAVEDSAT];
+    
+    if(![ModalController  getContforKey:RADSAVED])
+        [ModalController saveTheContent:@"20000"
+                                withKey:RADSAVED];
+    
     NSUserDefaults * defs = [NSUserDefaults standardUserDefaults];
 
     facebook = [[Facebook alloc] initWithAppId:FacebookAppID];
@@ -33,6 +41,8 @@ NSString * const facebookExpirationDateKey = @"facebookExpirationDate";
     SplashScreenController = [[SplashScreenViewController alloc] init];
     navigation = [[UINavigationController alloc] initWithRootViewController:SplashScreenController];
     [self.window    addSubview:navigation.view];
+    
+    
     // Override point for customization after application launch.
     [self.window makeKeyAndVisible];
     return YES;

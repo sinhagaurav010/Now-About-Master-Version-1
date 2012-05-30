@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Global.h"
 #import "ModalController.h"
-
+#import "EGOImageView.h"
 @protocol infoViewDelagate <NSObject>
 
 -(void)openEmail:(NSString *)string;
@@ -20,6 +20,8 @@
     
     
 }
+
+-(void)setAllImage:(NSArray *)arrayImages;
 
 @property(retain)id<infoViewDelagate>delagate;
 

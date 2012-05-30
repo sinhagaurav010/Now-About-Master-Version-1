@@ -13,6 +13,9 @@
 		1C1C88081560F5FB00B7670A /* UIBarButtonItem+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1C88071560F5FB00B7670A /* UIBarButtonItem+Extension.m */; };
 		1C1C880C15611BCC00B7670A /* DealView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1C880B15611BCC00B7670A /* DealView.m */; };
 		1C1C881415612D9400B7670A /* DealView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C1C881315612D9400B7670A /* DealView.xib */; };
+		1C36995015763091005E561A /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C36994F15763091005E561A /* Twitter.framework */; };
+		1C36995315763097005E561A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C36995215763097005E561A /* Accounts.framework */; };
+		1C369958157656F0005E561A /* PlaceHolder.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C369957157656EF005E561A /* PlaceHolder.png */; };
 		1C889235144C5ABE00CC9D2C /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C88922C144C5ABD00CC9D2C /* EGOCache.m */; };
 		1C889236144C5ABE00CC9D2C /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C88922F144C5ABD00CC9D2C /* EGOImageLoader.m */; };
 		1C889237144C5ABE00CC9D2C /* EGOImageLoadConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C889231144C5ABE00CC9D2C /* EGOImageLoadConnection.m */; };
@@ -242,6 +245,9 @@
 		1C1C880A15611BCC00B7670A /* DealView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealView.h; sourceTree = "<group>"; };
 		1C1C880B15611BCC00B7670A /* DealView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealView.m; sourceTree = "<group>"; };
 		1C1C881315612D9400B7670A /* DealView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DealView.xib; sourceTree = "<group>"; };
+		1C36994F15763091005E561A /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		1C36995215763097005E561A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		1C369957157656EF005E561A /* PlaceHolder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlaceHolder.png; sourceTree = "<group>"; };
 		1C88922B144C5ABD00CC9D2C /* EGOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOCache.h; sourceTree = "<group>"; };
 		1C88922C144C5ABD00CC9D2C /* EGOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOCache.m; sourceTree = "<group>"; };
 		1C88922D144C5ABD00CC9D2C /* EGOImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageButton.h; sourceTree = "<group>"; };
@@ -555,6 +561,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C36995315763097005E561A /* Accounts.framework in Frameworks */,
+				1C36995015763091005E561A /* Twitter.framework in Frameworks */,
 				5D40713D156039B10060A4AA /* QuartzCore.framework in Frameworks */,
 				5DD3C51214940939007835B1 /* SystemConfiguration.framework in Frameworks */,
 				5DD3C51014940925007835B1 /* MobileCoreServices.framework in Frameworks */,
@@ -714,6 +722,8 @@
 		5D208126143E287F00D6B481 = {
 			isa = PBXGroup;
 			children = (
+				1C36995215763097005E561A /* Accounts.framework */,
+				1C36994F15763091005E561A /* Twitter.framework */,
 				5D40713C156039AF0060A4AA /* QuartzCore.framework */,
 				5DEB6F3314B7852A006C8089 /* TextFile&XMlFiles */,
 				5DB5D05A152F4B090098B47E /* ViewControllers */,
@@ -1168,6 +1178,7 @@
 		5DC47137143FB4A200DE5380 /* ImagesACS */ = {
 			isa = PBXGroup;
 			children = (
+				1C369957157656EF005E561A /* PlaceHolder.png */,
 				5D4070FB156017020060A4AA /* Requested Icons */,
 				5D40714E156049920060A4AA /* OldImages */,
 			);
@@ -1462,6 +1473,7 @@
 				1C1C88021560EA0600B7670A /* InfoView.xib in Resources */,
 				1C1C88041560EA0600B7670A /* DetailsViewController_Nw.xib in Resources */,
 				1C1C881415612D9400B7670A /* DealView.xib in Resources */,
+				1C369958157656F0005E561A /* PlaceHolder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

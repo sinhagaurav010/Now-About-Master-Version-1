@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewPickerTool.h"
+#import "ModalController.h"
 
 @interface SettingViewController : UIViewController
+{
+    IBOutlet UISwitch *switchpostCode;
+    
+    NSMutableArray *arrayDistanceFilter;
+    ViewPickerTool *pickerDis;
+}
+
+-(IBAction)switchChangedPost:(id)sender;
+
+-(IBAction)clickForMilesCriteria:(id)sender;
 
 @end

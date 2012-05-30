@@ -194,7 +194,8 @@ if(isSaveToFav == 1)
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
     
-    DetailsViewController *detailController = [[DetailsViewController    alloc] initWithNibName:@"DetailsViewController_Nw" bundle:nil];
+    DetailsViewController *detailController = [[DetailsViewController    alloc] initWithNibName:@"DetailsViewController_Nw" 
+                                                                                         bundle:nil];
     
     detailController.hidesBottomBarWhenPushed = YES;
 
